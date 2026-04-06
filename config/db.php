@@ -1,22 +1,23 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php'; // Nạp composer autoload
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
-// Tải file .env
-$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv->load();
+}
 
-// Lấy giá trị từ .env
-$host = $_ENV['DB_HOST'];
-$dbname = $_ENV['DB_NAME'];
-$port = $_ENV['DB_PORT'] ?? 3307;
-$username = $_ENV['DB_USER'];
-$password = $_ENV['DB_PASS'];
-$charset = $_ENV['DB_CHARSET'] ?? 'utf8mb4';
+$host = $_ENV['DB_HOST'] ?? getenv('DB_HOST');
+$dbname = $_ENV['DB_NAME'] ?? getenv('DB_NAME');
+$port = $_ENV['DB_PORT'] ?? getenv('DB_PORT') ?? 3306;
+$username = $_ENV['DB_USER'] ?? getenv('DB_USER');
+$password = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
+$charset = $_ENV['DB_CHARSET'] ?? getenv('DB_CHARSET') ?? 'utf8mb4';
 
-// Cấu hình hiển thị lỗi
-if ($_ENV['APP_DEBUG'] === 'true') {
+$debug = $_ENV['APP_DEBUG'] ?? getenv('APP_DEBUG') ?? 'false';
+
+if ($debug === 'true') {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 } else {
@@ -24,13 +25,13 @@ if ($_ENV['APP_DEBUG'] === 'true') {
     ini_set('display_errors', 0);
 }
 
-// Kết nối MySQLi
+// Kết nối DB
 $conn = mysqli_connect($host, $username, $password, $dbname, $port);
 
-// Kiểm tra kết nối
+// Check lỗi
 if (!$conn) {
-    die("Connection failed to " . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-// Thiết lập charset
+// Charset
 mysqli_set_charset($conn, $charset);
