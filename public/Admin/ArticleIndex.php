@@ -134,6 +134,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <script>
+      // ==================== BASE API ====================
+      const apiBase = '/api/Articles/';
+      
       // ==================== KIỂM TRA QUYỀN ADMIN ====================
       const user = JSON.parse(localStorage.getItem("user") || '{}');
       
@@ -146,8 +149,6 @@
           loadArticles();
       }
 
-      // ==================== BASE API ====================
-      const apiBase = '/api/Articles/';
 
       // ==================== HÀM LOAD DANH SÁCH BÀI VIẾT ====================
       function loadArticles() {
