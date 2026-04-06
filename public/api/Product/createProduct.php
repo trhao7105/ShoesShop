@@ -1,7 +1,8 @@
 <?php
 header("Content-Type: application/json");
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Shoes-Shop/config/db.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Shoes-Shop/models/product.model.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../models/product.model.php';
 
 $productModel = new Product($conn);
 $data = json_decode(file_get_contents("php://input"), true) ?? [];
