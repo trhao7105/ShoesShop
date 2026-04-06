@@ -42,7 +42,7 @@
         const user = JSON.parse(localStorage.getItem("user"));
         if (user["role"] !== "admin") {
             alert("Bạn phải là admin để truy cập trang này!");
-            window.location.href = "../public/index.php";
+            window.location.href = "/index.php";
         }
         const params = new URLSearchParams(location.search);
         const orderId = params.get('id');

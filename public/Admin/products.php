@@ -1,6 +1,6 @@
 <?php
 // products.php
-$api = '../../api/Product/';
+$api = '/api/Product/';
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -183,7 +183,7 @@ $api = '../../api/Product/';
             alert("Bạn phải là admin để truy cập trang này!");
             window.location.href = "/index.php";
         }
-        const api = '<?= $api ?>';
+        const api = '/api/Product/';
 
         async function loadProducts() {
             try {

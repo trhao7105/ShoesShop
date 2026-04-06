@@ -199,12 +199,12 @@ if ($result) {
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user || user["role"] !== "admin") {
           alert("Bạn phải là admin để truy cập trang này!");
-          window.location.href = "../public/index.php";
+          window.location.href = "/index.php";
       }
 
       function deleteComment(id) {
           if (confirm('Bạn chắc chắn muốn xóa bình luận này?')) {
-              fetch('../api/Articles/deleteComment.php', {
+              fetch('/api/Articles/deleteComment.php', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: 'id=' + id

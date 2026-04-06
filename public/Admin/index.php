@@ -154,7 +154,7 @@ $total_faq      = $conn->query("SELECT COUNT(*) AS total_faq FROM faq")->fetch_a
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user || user.role !== "admin") {
             alert("Bạn phải là admin để truy cập trang này!");
-            window.location.href = "../public/index.php";
+            window.location.href = "/index.php";
         }
         
         // Nút Logout trong Sidebar đã được xử lý bởi sidebar.php, không cần viết lại

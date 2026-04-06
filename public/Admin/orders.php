@@ -1,6 +1,6 @@
 <?php
 // orders.php
-$api = '../../api/Order/';
+$api = '/api/Order/';
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -127,7 +127,7 @@ $api = '../../api/Order/';
             alert("Bạn phải là admin để truy cập trang này!");
             window.location.href = "../public/index.php";
         }
-        const api = '<?= $api ?>';
+        const api = '/api/Order/';
 
         async function loadOrders() {
             try {

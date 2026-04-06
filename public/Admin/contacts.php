@@ -1,6 +1,6 @@
 <?php
 // contacts.php
-$api = '../../api/Contact/';
+$api = '/api/Contact/';
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -138,7 +138,7 @@ $api = '../../api/Contact/';
             alert("Bạn phải là admin để truy cập trang này!");
             window.location.href = "../public/index.php";
         }
-        const api = '<?= $api ?>';
+        const api = '/api/Contact/';
 
         async function loadContacts() {
             try {
