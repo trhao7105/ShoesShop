@@ -294,12 +294,12 @@
                 if (!confirm("Bạn có chắc chắn muốn đăng xuất?")) return;
                 try {
                     if (typeof axios !== 'undefined') {
-                        await axios.post("../api/Authentication/logout.php");
+                        await axios.post("/api/Authentication/logout.php");
                         localStorage.removeItem("user");
                         localStorage.removeItem("cart");
                     }
-                    window.location.href = "../public/login.php";
-                } catch (err) { window.location.href = "../public/login.php"; }
+                    window.location.href = "/login.php";
+                } catch (err) { window.location.href = "/login.php"; }
             }
         });
     });
