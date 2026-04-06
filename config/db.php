@@ -53,4 +53,3 @@ if (!$success) {
 
 mysqli_set_charset($conn, $charset);
 
-echo "<!-- Kết nối SkySQL thành công -->"; 
