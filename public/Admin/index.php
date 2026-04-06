@@ -1,5 +1,5 @@
 <?php
-include_once "../config/db.php";
+include_once "../../config/db.php";
 
 $total_products = $conn->query("SELECT COUNT(*) AS total_products FROM products")->fetch_assoc()['total_products'];
 $total_orders   = $conn->query("SELECT COUNT(*) AS total_orders FROM orders")->fetch_assoc()['total_orders'];

@@ -1,6 +1,6 @@
 <?php
 // orders.php
-$api = '../api/Order/';
+$api = '../../api/Order/';
 ?>
 <!DOCTYPE html>
 <html lang="vi">

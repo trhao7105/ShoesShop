@@ -1,5 +1,5 @@
 // js/products.js – BẢN HOÀN CHỈNH CUỐI CÙNG – ĐÃ CHẠY NGON LÀNH
-const api = '/Shoes-Shop/api/Product/';
+const api = '/api/Product/';
 
 async function loadProducts() {
     try {

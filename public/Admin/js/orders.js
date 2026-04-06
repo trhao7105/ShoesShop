@@ -1,5 +1,5 @@
 // js/orders.js – ĐÃ BỎ CỘT KHÁCH HÀNG – SIÊU GỌN, SIÊU NHANH
-const api = '/Shoes-Shop/api/Order/';
+const api = '/api/Order/';
 
 async function loadOrders() {
     try {

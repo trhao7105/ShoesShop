@@ -1,5 +1,5 @@
 <?php 
-require_once '../config/db.php'; 
+require_once '../../config/db.php'; 
 
 $sql = "SELECT c.*, a.title 
         FROM comments c 

@@ -1,6 +1,6 @@
 <?php
 // Dùng include_once để tránh lỗi nếu sidebar cũng gọi file này
-include_once "../config/db.php";
+include_once "../../config/db.php";
 
 // 1. Xử lý Xóa người dùng (Logic cũ của bạn)
 if (isset($_GET['delete'])) {

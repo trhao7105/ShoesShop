@@ -1,5 +1,5 @@
 // Admin/js/contacts.js – ĐÃ TEST 100% VỚI BẢNG contacts CỦA BẠN
-const api = '/Shoes-Shop/api/Contact/';
+const api = '/api/Contact/';
 
 async function loadContacts() {
     try {

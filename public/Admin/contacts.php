@@ -1,6 +1,6 @@
 <?php
 // contacts.php
-$api = '../api/Contact/';
+$api = '../../api/Contact/';
 ?>
 <!DOCTYPE html>
 <html lang="vi">
