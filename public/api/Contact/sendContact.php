@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../models/Contact.php';
+require_once __DIR__ . '/../../../models/Contact.php';
 
 // đọc JSON input
 $data = json_decode(file_get_contents("php://input"), true);
