@@ -90,14 +90,14 @@
         const user = JSON.parse(localStorage.getItem("user"));
         if (user["role"] !== "admin") {
             alert("Bạn phải là admin để truy cập trang này!");
-            window.location.href = "../public/index.php";
+            window.location.href = "/index.php";
         }
         const faqTable = document.getElementById("faqTable");
         const adminCategory = document.getElementById("adminCategory");
         const editCategory = document.getElementById("edit_category");
 
         // Load categories
-        fetch("../api/FAQ/getAllCategories.php")
+        fetch("/api/FAQ/getAllCategories.php")
             .then(res => res.json())
             .then(res => {
                 res.data.forEach(cat => {
@@ -108,7 +108,7 @@
 
         // Load FAQs
         function loadFAQ() {
-            fetch("../api/FAQ/getAllFAQ.php")
+            fetch("/api/FAQ/getAllFAQ.php")
                 .then(res => res.json())
                 .then(res => {
                     faqTable.innerHTML = "";
@@ -149,7 +149,7 @@
             const fd = new FormData();
             fd.append("faq_id", id);
 
-            fetch("../api/FAQ/deleteFAQ.php", {
+            fetch("/api/FAQ/deleteFAQ.php", {
                 method: "POST",
                 body: fd
             }).then(() => loadFAQ());
@@ -157,7 +157,7 @@
 
         // Edit
         function edit(id) {
-            fetch(`../api/FAQ/getFAQById.php?faq_id=${id}`)
+            fetch(`/api/FAQ/getFAQById.php?faq_id=${id}`)
                 .then(res => res.json())
                 .then(res => {
                     const f = res.data;
@@ -177,7 +177,7 @@
             e.preventDefault();
             const fd = new FormData(this);
 
-            fetch("../api/FAQ/updateFAQ.php", {
+            fetch("/api/FAQ/updateFAQ.php", {
                 method: "POST",
                 body: fd
             })

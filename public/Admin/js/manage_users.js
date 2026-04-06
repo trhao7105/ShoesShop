@@ -3,7 +3,7 @@ const tableBody = document.querySelector("#userTable tbody");
 // Load user list
 async function loadUsers() {
   try {
-    const res = await axios.get("../../api/User/getAllUsers.php");
+    const res = await axios.get("/api/User/getAllUsers.php");
     const users = res.data.data;
 
     tableBody.innerHTML = users
@@ -49,7 +49,7 @@ async function deleteUser(id) {
   const form = new FormData();
   form.append("user_id", id);
 
-  await axios.post("../../api/User/deleteUser.php", form);
+  await axios.post("/api/User/deleteUser.php", form);
 
   loadUsers();
 }
@@ -62,7 +62,7 @@ function bindRoleChange() {
       form.append("user_id", this.dataset.id);
       form.append("role", this.value);
 
-      await axios.post("../../api/User/updateRole.php", form);
+      await axios.post("/api/User/updateRole.php", form);
     });
   });
 }

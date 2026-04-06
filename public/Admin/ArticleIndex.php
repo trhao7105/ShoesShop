@@ -134,63 +134,82 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <script>
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user || user["role"] !== "admin") {
-        alert("Bạn phải là admin để truy cập trang này!");
-        window.location.href = "../public/index.php";
+      // Kiểm tra quyền admin
+      const user = JSON.parse(localStorage.getItem("user") || '{}');
+      if (!user || user.role !== "admin") {
+          alert("Bạn phải là admin để truy cập trang này!");
+          window.location.href = "/index.php";
+          return;
       }
 
-      fetch('../../api/Articles/getAllArticles.php')
-          .then(r => r.json())
-          .then(articles => {
-            const tbody = document.getElementById('articlesTableBody');
-            document.getElementById('loading').style.display = 'none';
-            tbody.innerHTML = '';
-            
-            if(articles.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-3">Chưa có bài viết nào</td></tr>';
-                return;
-            }
+      // Base URL cho API
+      const apiBase = '/api/Articles/';
 
-            articles.forEach(a => {
-              tbody.innerHTML += `
-            <tr>
-              <td><span class="text-secondary">#${a.id}</span></td>
-              <td class="title-cell">
-                  <a href="ArticleEdit.php?id=${a.id}" class="fw-bold">${a.title}</a>
-              </td>
-              <td>${new Date(a.created_at).toLocaleDateString('vi-VN')}</td>
-              <td class="text-end">
-                <span class="dropdown">
-                  <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Hành động</button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="../public/articledetail.php?id=${a.id}" target="_blank">Xem chi tiết</a>
-                    <a class="dropdown-item" href="ArticleEdit.php?id=${a.id}">Chỉnh sửa</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#" onclick="deleteArticle(${a.id})">Xóa bài viết</a>
-                  </div>
-                </span>
-              </td>
-            </tr>`;
-            });
+      // Load danh sách bài viết
+      fetch(apiBase + 'getAllArticles.php')
+          .then(r => {
+              if (!r.ok) throw new Error('Network response was not ok');
+              return r.json();
+          })
+          .then(articles => {
+              const tbody = document.getElementById('articlesTableBody');
+              document.getElementById('loading').style.display = 'none';
+              tbody.innerHTML = '';
+
+              if (articles.length === 0) {
+                  tbody.innerHTML = '<tr><td colspan="4" class="text-center py-3">Chưa có bài viết nào</td></tr>';
+                  return;
+              }
+
+              articles.forEach(a => {
+                  tbody.innerHTML += `
+                  <tr>
+                      <td><span class="text-secondary">#${a.id}</span></td>
+                      <td class="title-cell">
+                          <a href="ArticleEdit.php?id=${a.id}" class="fw-bold">${a.title}</a>
+                      </td>
+                      <td>${new Date(a.created_at).toLocaleDateString('vi-VN')}</td>
+                      <td class="text-end">
+                          <span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Hành động</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                  <a class="dropdown-item" href="/articledetail.php?id=${a.id}" target="_blank">Xem chi tiết</a>
+                                  <a class="dropdown-item" href="ArticleEdit.php?id=${a.id}">Chỉnh sửa</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item text-danger" href="#" onclick="deleteArticle(${a.id})">Xóa bài viết</a>
+                              </div>
+                          </span>
+                      </td>
+                  </tr>`;
+              });
           })
           .catch(err => {
               console.error(err);
-              document.getElementById('loading').innerHTML = '<span class="text-danger">Lỗi tải dữ liệu</span>';
+              document.getElementById('loading').innerHTML = '<span class="text-danger">Lỗi tải dữ liệu từ server. Vui lòng thử lại sau.</span>';
           });
 
       function deleteArticle(id) {
-        if (confirm('Bạn có chắc chắn muốn xóa?')) {
-          fetch('../api/Articles/deleteArticle.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'id=' + id
-          }).then(r => r.json()).then(data => {
-              if (data.success) { alert('Xóa thành công!'); location.reload(); } 
-              else { alert('Lỗi: ' + data.message); }
+          if (!confirm('Bạn có chắc chắn muốn xóa bài viết này?')) return;
+
+          fetch(apiBase + 'deleteArticle.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: 'id=' + id
+          })
+          .then(r => r.json())
+          .then(data => {
+              if (data.success) {
+                  alert('Xóa thành công!');
+                  location.reload();
+              } else {
+                  alert('Lỗi: ' + (data.message || 'Không xác định'));
+              }
+          })
+          .catch(err => {
+              console.error(err);
+              alert('Có lỗi xảy ra khi xóa bài viết');
           });
-        }
       }
-    </script>
+  </script>
   </body>
 </html>

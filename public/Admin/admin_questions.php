@@ -39,10 +39,10 @@
         const user = JSON.parse(localStorage.getItem("user"));
         if (user["role"] !== "admin") {
             alert("Bạn phải là admin để truy cập trang này!");
-            window.location.href = "../public/index.php";
+            window.location.href = "/index.php";
         }
         function loadQuestions() {
-            fetch("../api/FAQ/getAllQuestions.php")
+            fetch("/api/FAQ/getAllQuestions.php")
                 .then(res => res.json())
                 .then(res => {
                     const table = document.getElementById("questionTable");
@@ -68,7 +68,7 @@
             const fd = new FormData();
             fd.append("question_id", id);
 
-            fetch("../api/FAQ/deleteQuestion.php", {
+            fetch("/api/FAQ/deleteQuestion.php", {
                 method: "POST",
                 body: fd
             }).then(() => loadQuestions());
