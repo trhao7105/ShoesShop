@@ -79,7 +79,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="col-md-4 post-card" data-title="<?= strtolower(htmlspecialchars($post['title'])) ?>"
                         data-excerpt="<?= strtolower(htmlspecialchars($post['excerpt'])) ?>">
                         <div class="card h-100 shadow-sm">
-                            <img src="../public/<?= htmlspecialchars($post['image']) ?>" class="card-img-top"
+                            <img src="/<?= htmlspecialchars($post['image']) ?>" class="card-img-top"
                                 style="height:200px; object-fit:cover;" onerror="this.src='../public/img/no-image.jpg'">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title"><?= htmlspecialchars($post['title']) ?></h5>
