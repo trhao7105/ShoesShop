@@ -2,7 +2,7 @@
 header("Content-Type: application/json; charset=UTF-8");
 session_start();
 
-require_once __DIR__ . '/../../../../config/db.php';
+require_once __DIR__ . '/../../../config/db.php';
 require_once __DIR__ . '/../../../models/siteContent.model.php';
 
 // if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {

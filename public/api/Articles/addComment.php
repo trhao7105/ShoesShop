@@ -2,7 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-require_once '/../../../../config/db.php';  
+require_once '../../../config/db.php';  
 
 $article_id = (int)($_POST['article_id'] ?? 0);
 $content    = trim($_POST['content'] ?? '');
