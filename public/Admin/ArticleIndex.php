@@ -140,7 +140,7 @@
         window.location.href = "../public/index.php";
       }
 
-      fetch('../api/Articles/getAllArticles.php')
+      fetch('../../api/Articles/getAllArticles.php')
           .then(r => r.json())
           .then(articles => {
             const tbody = document.getElementById('articlesTableBody');
